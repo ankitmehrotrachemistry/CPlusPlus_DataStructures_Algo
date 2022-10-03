@@ -14,6 +14,17 @@ class Node
        this -> prev = NULL;
        this -> next = NULL;
     }
+
+    ~Node()
+    {
+        int val = this -> data;
+        if(next != NULL)
+        {
+            delete next;
+            next = NULL;
+        }
+        cout << "Memory Free for node with data " << val << endl; 
+    }
 };
 
 // Traverse a Doubly Linked List
@@ -104,9 +115,8 @@ void deleteNode(int position, Node* &head)
     if(position == 1)
     {
         Node* temp = head;
-        head = head -> next;
-
-        // Memory Free Start Node
+        temp -> next -> prev = NULL;
+        head = temp -> next;
         temp -> next = NULL;
         delete temp;
     }
@@ -126,8 +136,10 @@ void deleteNode(int position, Node* &head)
             cnt++;
         }
 
+        curr -> prev = NULL;
         prev -> next = curr -> next;
         curr -> next = NULL;
+
         delete curr;
     }
 
@@ -167,6 +179,16 @@ int main()
 
     InsertAtPosition(tail, head, 9, 280);
     print(head);
+
+    deleteNode(1, head);
+    print(head);
+    cout << "Head " << head -> data << endl;
+    cout << "Tail " << tail -> data << endl;
+
+    deleteNode(6, head);
+    print(head);
+    cout << "Head " << head -> data << endl;
+    cout << "Tail " << tail -> data << endl;
 
     return 0;
 }
