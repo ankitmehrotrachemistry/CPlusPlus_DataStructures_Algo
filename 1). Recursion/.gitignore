@@ -1,1 +1,6 @@
-*Application (.exe)
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
